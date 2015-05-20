@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  detail: MyText
+  instructable_id: 1
+  instructable_type: MyString
+
+two:
+  detail: MyText
+  instructable_id: 1
+  instructable_type: MyString
