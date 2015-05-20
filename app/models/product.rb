@@ -5,4 +5,8 @@ class Product < ActiveRecord::Base
   has_many :product_stores
   has_many :stores, through: :product_stores
 
+  has_attached_file :image
+
+  delegate :name, to: :category, prefix: true
+
 end
