@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'paperclip'
 gem 'responders', '~> 2.0'
+gem 'fog'
 
 group :development, :test do
   gem 'byebug'
