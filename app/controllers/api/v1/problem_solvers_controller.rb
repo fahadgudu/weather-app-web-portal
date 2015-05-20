@@ -5,6 +5,7 @@ class Api::V1::ProblemSolversController < ApplicationController
   end
 
   def show
+    @problem_solver = ProblemSolver.find params[:id]
   end
 
 end
