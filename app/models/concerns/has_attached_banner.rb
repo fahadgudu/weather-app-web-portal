@@ -3,7 +3,7 @@ module HasAttachedBanner
 
   included do
     has_one :banner, as: :imageable
-    delegate :image, to: :banner
+    delegate :image, to: :banner, allow_nil: true
   end
 
 end
