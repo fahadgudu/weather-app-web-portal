@@ -4,6 +4,8 @@ class Product < ActiveRecord::Base
   has_many :recommended_products
   has_many :product_stores
   has_many :stores, through: :product_stores
+  has_many :usages
+  has_many :instructions, as: :instructable
 
   has_attached_file :image
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520091916) do
+ActiveRecord::Schema.define(version: 20150521062314) do
 
   create_table "banners", force: :cascade do |t|
     t.string   "imageable_type",     limit: 255
@@ -112,8 +112,19 @@ ActiveRecord::Schema.define(version: 20150520091916) do
     t.datetime "updated_at",               null: false
   end
 
+  create_table "usages", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "product_id",  limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "usages", ["product_id"], name: "index_usages_on_product_id", using: :btree
+
   add_foreign_key "growing_seasons", "growing_guides"
   add_foreign_key "product_stores", "products"
   add_foreign_key "product_stores", "stores"
   add_foreign_key "products", "categories"
+  add_foreign_key "usages", "products"
 end
