@@ -1,0 +1,19 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000/apidocs/",
+  "resourcePath": "tokenizer",
+  "apis": [
+    {
+      "path": "api/generateToken.json",
+      "operations": [
+        {
+          "summary": "Generates token to access APIs",
+          "notes": "Generates token to access APIs",
+          "method": "post",
+          "nickname": "Api::V1::Tokenizer#generate_token"
+        }
+      ]
+    }
+  ]
+}

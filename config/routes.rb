@@ -10,4 +10,5 @@ Rails.application.routes.draw do
       post '/generateToken', to: "tokenizer#generate_token"
     end
   end
+  get "/docs", to: "api_docs#index"
 end

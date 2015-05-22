@@ -1,0 +1,83 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000/apidocs/",
+  "resourcePath": "products",
+  "apis": [
+    {
+      "path": "api/categories/{category_id}/products.json",
+      "operations": [
+        {
+          "summary": "Returns the products of a specific category",
+          "notes": "This lists all the products of a specific category",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "category_id",
+              "type": "integer",
+              "description": "ID of the category",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::Products#index"
+        }
+      ]
+    },
+    {
+      "path": "api/categories/{category_id}/products/{id}.json",
+      "operations": [
+        {
+          "summary": "Returns the deails of a particular product",
+          "notes": "This display details of a particular product",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "category_id",
+              "type": "integer",
+              "description": "ID of the category",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "integer",
+              "description": "ID of the product",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::Products#show"
+        }
+      ]
+    }
+  ]
+}

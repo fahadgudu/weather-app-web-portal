@@ -1,0 +1,69 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000/apidocs/",
+  "resourcePath": "problem_solvers",
+  "apis": [
+    {
+      "path": "api/problem_solver.json",
+      "operations": [
+        {
+          "summary": "Fetches all Problem solvers",
+          "notes": "This lists all the Problem solvers",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::ProblemSolvers#index"
+        }
+      ]
+    },
+    {
+      "path": "api/problem_solver/{id}.json",
+      "operations": [
+        {
+          "summary": "Returns details of the problem solver",
+          "notes": "Return problem and its resolution.",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "access_token",
+              "type": "string",
+              "description": "Access Token",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "id",
+              "type": "integer",
+              "description": "ID",
+              "required": true
+            }
+          ],
+          "responseMessages": [
+            {
+              "code": 401,
+              "responseModel": null,
+              "message": "Unauthorized"
+            }
+          ],
+          "method": "get",
+          "nickname": "Api::V1::ProblemSolvers#show"
+        }
+      ]
+    }
+  ]
+}
