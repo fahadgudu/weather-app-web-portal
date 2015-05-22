@@ -11,7 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
-public/system/*
+public/products/*
 public/banners/*
 
 # Ignore application configuration
