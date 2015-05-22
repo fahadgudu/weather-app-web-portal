@@ -55,7 +55,8 @@ namespace :populate do
     entity.create_banner(image: Faker::Avatar.image)
   end
 
-  def create_usages(entity)
+  def create_usages(product)
+    product.usages.create(title: fake_word, description: para)
   end
 
   def create_instructions(entity, number = 3)
@@ -72,7 +73,9 @@ namespace :populate do
 
   def create_seasons(entity, number)
     months = (1..12).collect{|n| n.month.ago.strftime("%b") }
-    entity.growing_seasons.create(season: months.sample, instructions: Faker::Lorem.sentences(2).join)
+    3.times do
+      entity.growing_seasons.create(season: months.sample, instructions: Faker::Lorem.sentences(2).join)
+    end
   end
 
   def fake_word
