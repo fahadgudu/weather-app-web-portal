@@ -16,3 +16,7 @@ public/banners/*
 
 # Ignore application configuration
 /config/application.yml
+
+
+# Ignore swagger json files
+public/apidocs/*
