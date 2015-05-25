@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150521062314) do
+ActiveRecord::Schema.define(version: 20150525070643) do
 
   create_table "banners", force: :cascade do |t|
     t.string   "imageable_type",     limit: 255
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20150521062314) do
     t.float    "longitude",  limit: 24
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "phone",      limit: 255
   end
 
   create_table "tokens", force: :cascade do |t|

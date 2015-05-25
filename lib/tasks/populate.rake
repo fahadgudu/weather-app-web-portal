@@ -49,6 +49,14 @@ namespace :populate do
 
   desc "Create stores"
   task stores: :environment do
+    10.times do
+      store = Store.create(name: Faker::Name.name, address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone, latitude: Faker::Address.latitude, longitude: Faker::Address.longitude, postcode: Faker::Address.postcode)
+        create_banner(store)
+      5.times do
+        store.products << Product.random
+      end
+      store.save
+    end
   end
 
   def create_banner(entity)
