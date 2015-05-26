@@ -11,5 +11,7 @@ class Product < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 
   delegate :name, to: :category, prefix: true
+  delegate :parent_name, to: :category, prefix: true
+  delegate :parent_id, to: :category, prefix: true
 
 end
