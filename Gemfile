@@ -18,7 +18,8 @@ gem 'figaro'
 gem 'swagger-docs'
 gem 'swagger-ui_rails'
 gem 'swagger_ui_generator'
-
+gem 'activeadmin', '~> 1.0.0.pre1'
+gem 'devise'
 gem 'faker'
 
 group :development, :test do
