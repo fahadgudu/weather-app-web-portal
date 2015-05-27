@@ -11,6 +11,7 @@ namespace :populate do
 
   desc "Create how to guides"
   task guides: :environment do
+    puts "Creating how to grow guides"
     5.times do
       gg = GrowingGuide.create(title: fake_word, description: para)
       create_instructions(gg, rand(3..5))
@@ -23,6 +24,7 @@ namespace :populate do
 
   desc "Create categories"
   task categories: :environment do
+    puts "Creating categories"
     3.times do
       c = Category.create(name: fake_word)
       rand(3..5).times do
@@ -33,6 +35,7 @@ namespace :populate do
 
   desc "Create problem (grin)"
   task problem_solvers: :environment do
+    puts "Creating problem solvers"
     rand(3..5).times do
       ps = ProblemSolver.create(title: fake_word, problem: para, resolution: para)
       create_banner(ps)
@@ -41,14 +44,18 @@ namespace :populate do
   end
 
   desc "Create products"
+  puts "Creating products"
   task products: :environment do
     25.times do
       p = Product.create(title: fake_word, description: para, category_id: Category.sub.random.id, image: Faker::Avatar.image)
+      create_usages(p)
+      create_instructions(p)
     end
   end
 
   desc "Create stores"
   task stores: :environment do
+    puts "Creating stores"
     10.times do
       store = Store.create(name: Faker::Name.name, address: Faker::Address.street_address, phone: Faker::PhoneNumber.cell_phone, latitude: Faker::Address.latitude, longitude: Faker::Address.longitude, postcode: Faker::Address.postcode)
         create_banner(store)
@@ -64,7 +71,9 @@ namespace :populate do
   end
 
   def create_usages(product)
-    product.usages.create(title: fake_word, description: para)
+    5.times do
+      product.usages.create(title: fake_word, description: para)
+    end
   end
 
   def create_instructions(entity, number = 3)
