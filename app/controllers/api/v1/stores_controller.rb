@@ -6,11 +6,13 @@ class Api::V1::StoresController < ApplicationController
     summary "Returns the list of retailers"
     notes "Lists all retailers"
     param :query, :access_token, :string, :required, "Access Token"
+    param :query, :company,      :string, :optional, "Name of the company to filter results for"
     response :unauthorized
   end
 
   def index
     @stores = Store.all
+    @stores = @stores.joins(:company).where('companies.name = ?', params[:company]) if params[:company].present?
   end
 
   swagger_api :show do

@@ -1,1 +1,1 @@
-json.array! @stores, :id, :name, :address, :postcode, :latitude, :longitude, :phone, :image
+json.array! @stores, :id, :name, :address, :postcode, :latitude, :longitude, :phone, :image, :company

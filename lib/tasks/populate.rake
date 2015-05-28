@@ -6,6 +6,7 @@ namespace :populate do
     Rake::Task['populate:products'].invoke
     Rake::Task['populate:guides'].invoke
     Rake::Task['populate:problem_solvers'].invoke
+    Rake::Task['populate:companies'].invoke
     Rake::Task['populate:stores'].invoke
   end
 
@@ -27,8 +28,12 @@ namespace :populate do
     puts "Creating categories"
     3.times do
       c = Category.create(name: fake_word)
+      create_banner(c)
       rand(3..5).times do
         c.sub_categories.create(name: fake_word)
+      end
+      c.sub_categories.each do |sub|
+        create_banner(sub)
       end
     end
   end
@@ -44,8 +49,8 @@ namespace :populate do
   end
 
   desc "Create products"
-  puts "Creating products"
   task products: :environment do
+    puts "Creating products"
     25.times do
       p = Product.create(title: fake_word, description: para, category_id: Category.sub.random.id, image: Faker::Avatar.image)
       create_usages(p)
@@ -61,8 +66,17 @@ namespace :populate do
         create_banner(store)
       5.times do
         store.products << Product.random
+        store.company = Company.random
       end
       store.save
+    end
+  end
+
+  desc "Create companies"
+  task companies: :environment do
+    puts "Creating companies"
+    10.times do
+      Company.create(name: fake_word)
     end
   end
 
