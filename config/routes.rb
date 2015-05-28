@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       end
       resources :search, only: [] do
         collection do
-          get "/:section", to: "search#index", as: :section, constraints: { section: /how_to_grow|product|retailer/ }
+          get "/:section", to: "search#index", as: :section, constraints: { section: /how_to_grow|product|retailer|problem_solver/ }
         end
       end
       post '/generateToken', to: "tokenizer#generate_token"

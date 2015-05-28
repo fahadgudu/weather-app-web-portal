@@ -20,6 +20,8 @@ class Api::V1::SearchController < ApplicationController
     when "retailer"
       klass = Store
       column = 'name'
+    when "problem_solver"
+      klass = ProblemSolver
     else
       []
     end
