@@ -27,6 +27,9 @@ class Api::V1::ProductsController < ApplicationController
 
   def show
     @product = @category.products.includes(:stores, :usages, :instructions).find params[:id]
+    @stores  = @product.stores
+    @stores  = @product.stores.where(places_id: Places.new(params[:latitude], params[:longitude]).search) if params[:latitude].present? && params[:longitude].present?
+    @stores  = @product.stores.joins(:company).where('companies.name = ?', params[:company]) if params[:company].present?
   end
 
   protected

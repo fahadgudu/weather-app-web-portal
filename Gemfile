@@ -21,6 +21,8 @@ gem 'swagger_ui_generator'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'devise'
 gem 'faker'
+gem 'geocoder'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug'
