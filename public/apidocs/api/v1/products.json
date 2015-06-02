@@ -47,20 +47,6 @@
           "parameters": [
             {
               "paramType": "query",
-              "name": "latitude",
-              "type": "string",
-              "description": "Latitude of central co-ordinates",
-              "required": true
-            },
-            {
-              "paramType": "query",
-              "name": "longitude",
-              "type": "string",
-              "description": "longitude of central co-ordinates",
-              "required": true
-            },
-            {
-              "paramType": "query",
               "name": "access_token",
               "type": "string",
               "description": "Access Token",
@@ -79,6 +65,27 @@
               "type": "integer",
               "description": "ID of the product",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "latitude",
+              "type": "float",
+              "description": "Latitude of center",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "longitude",
+              "type": "float",
+              "description": "Latitude of center",
+              "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "company",
+              "type": "string",
+              "description": "Name of the company to filter results for",
+              "required": false
             }
           ],
           "responseMessages": [

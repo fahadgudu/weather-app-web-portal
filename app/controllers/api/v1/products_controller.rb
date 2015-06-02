@@ -22,6 +22,9 @@ class Api::V1::ProductsController < ApplicationController
     param :query, :access_token, :string, :required, "Access Token"
     param :query, :category_id,  :integer, :required, "ID of the category"
     param :query, :id,           :integer, :required, "ID of the product"
+    param :query, :latitude,     :float, :required, "Latitude of center"
+    param :query, :longitude,    :float, :required, "Latitude of center"
+    param :query, :company,      :string, :optional, "Name of the company to filter results for"
     response :unauthorized
   end
 
