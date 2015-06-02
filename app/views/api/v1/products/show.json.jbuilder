@@ -2,3 +2,4 @@ json.extract! @product, :id, :title, :description, :image, :amount_needed, :cate
 json.stores @stores, :id, :name, :address, :postcode, :latitude, :longitude, :phone, :image, :company
 json.how_to_use @product.usages, :title, :description
 json.instructions @product.instructions, :detail
+json.company_list @companies, :id, :name
