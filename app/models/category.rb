@@ -12,4 +12,12 @@ class Category < ActiveRecord::Base
 
   delegate :name, to: :parent, prefix: true
 
+  def parent?
+    !self.parent_id.present?
+  end
+
+  def category_type
+    parent? ? "Category" : "Sub-category"
+  end
+
 end
