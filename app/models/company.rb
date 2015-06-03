@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
 
-  has_many :retailers
+  has_many :stores
 
 end
