@@ -2,6 +2,8 @@ ActiveAdmin.register GrowingGuide, as: "How To Grow" do
 
   menu label: "How To Grow"
 
+  filter :title
+
   permit_params :title, :description,
     instructions_attributes: [:id, :detail, :_destroy],
     growing_seasons_attributes: [:id, :season, :instructions, :_destroy],
