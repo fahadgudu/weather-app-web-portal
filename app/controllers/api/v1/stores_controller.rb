@@ -6,6 +6,9 @@ class Api::V1::StoresController < ApplicationController
     summary "Returns the list of retailers"
     notes "Lists all retailers"
     param :query, :access_token, :string, :required, "Access Token"
+    param :query, :latitude,     :float, :required, "Latitude of center"
+    param :query, :longitude,    :float, :required, "Longitude of center"
+    param :query, :distance,     :integer, :optional, "Dsitance"
     param :query, :company,      :string, :optional, "Name of the company to filter results for"
     response :unauthorized
   end
@@ -13,7 +16,7 @@ class Api::V1::StoresController < ApplicationController
   def index
     @stores = Store.all
     @stores = @stores.joins(:company).where('companies.name = ?', params[:company]) if params[:company].present?
-    @stores  = @stores.where(places_id: Places.new(params[:latitude], params[:longitude]).search) if params[:latitude].present? && params[:longitude].present?
+    @stores  = @stores.where(places_id: Places.new(params[:latitude], params[:longitude]).search(params[:distance] || Store::RADIUS)) if params[:latitude].present? && params[:longitude].present?
     @companies = Company.all
   end
 

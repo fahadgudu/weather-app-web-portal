@@ -77,8 +77,15 @@
               "paramType": "query",
               "name": "longitude",
               "type": "float",
-              "description": "Latitude of center",
+              "description": "Longitude of center",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "distance",
+              "type": "integer",
+              "description": "Dsitance",
+              "required": false
             },
             {
               "paramType": "query",

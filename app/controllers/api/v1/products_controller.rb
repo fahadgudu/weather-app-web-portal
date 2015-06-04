@@ -23,7 +23,8 @@ class Api::V1::ProductsController < ApplicationController
     param :query, :category_id,  :integer, :required, "ID of the category"
     param :query, :id,           :integer, :required, "ID of the product"
     param :query, :latitude,     :float, :required, "Latitude of center"
-    param :query, :longitude,    :float, :required, "Latitude of center"
+    param :query, :longitude,    :float, :required, "Longitude of center"
+    param :query, :distance,     :integer, :optional, "Dsitance"
     param :query, :company,      :string, :optional, "Name of the company to filter results for"
     response :unauthorized
   end
@@ -31,7 +32,7 @@ class Api::V1::ProductsController < ApplicationController
   def show
     @product = @category.products.includes(:stores, :usages, :instructions).find params[:id]
     @stores  = @product.stores
-    @stores  = @stores.where(places_id: Places.new(params[:latitude], params[:longitude]).search) if params[:latitude].present? && params[:longitude].present?
+    @stores  = @stores.where(places_id: Places.new(params[:latitude], params[:longitude]).search(params[:distance] || Store::RADIUS)) if params[:latitude].present? && params[:longitude].present?
     @stores  = @stores.joins(:company).where('companies.name = ?', params[:company]) if params[:company].present?
     @companies = Company.all
   end
