@@ -28,7 +28,13 @@ ActiveAdmin.register Store, as: "Retailer" do
     f.inputs :image,
       name: "Logo",
         for: [:banner, f.object.banner || Banner.new]
-      f.actions
+    f.inputs 'Products' do
+      f.has_many :product_stores, heading: nil, allow_destroy: true do |t|
+        t.input :product_id, as: :select, collection: Product.all
+      end
+    end
+    f.actions
+
   end
 
 end

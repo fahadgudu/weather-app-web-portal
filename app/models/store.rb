@@ -7,6 +7,8 @@ class Store < ActiveRecord::Base
   has_many :product_stores, dependent: :destroy
   has_many :products, through: :product_stores
 
+  accepts_nested_attributes_for :product_stores, allow_destroy: true
+
   belongs_to :company
 
   before_create :update_co_ordinates
