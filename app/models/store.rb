@@ -1,5 +1,7 @@
 class Store < ActiveRecord::Base
 
+  RADIUS = 1000
+
   include HasAttachedBanner
 
   alias_attribute :title, :name
