@@ -9,7 +9,7 @@ class Places
 
   def search(radius = 1000)
     path      = "/nearbysearch/json"
-    options   = {key: @api_key, location: "#{@lat},#{@lng}", radius: 1000, types: @type}
+    options   = {key: @api_key, location: "#{@lat},#{@lng}", types: @type,radius: radius}
     url       = URI [PLACES_BASE_URL, path].join
     url.query = options.to_param
     response  = HTTParty.get(url)
