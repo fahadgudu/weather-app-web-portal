@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528072841) do
+ActiveRecord::Schema.define(version: 20150603111028) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 20150528072841) do
     t.integer  "image_file_size",    limit: 4
     t.datetime "image_updated_at"
     t.float    "amount_needed",      limit: 24
+    t.integer  "product_type",       limit: 4
+    t.integer  "product_size",       limit: 4
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
