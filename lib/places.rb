@@ -14,7 +14,7 @@ class Places
     url.query = options.to_param
     Rails.logger.info "Initializing request ...."
     Rails.logger.info CGI.unescape(url)
-    response  = HTTParty.get(url)
+    response  = HTTParty.get(url.to_s)
     results   = response["results"].select do |result|
       result["scope"] == "APP"
     end
