@@ -7,17 +7,20 @@ class Places
     @type    = type
   end
 
-  def search(radius = 1000)
+  def search(radius = 1000, pagetoken = nil, results = [])
     path      = "/nearbysearch/json"
     options   = {key: @api_key, location: "#{@lat},#{@lng}", types: @type,radius: radius}
+    options[:pagetoken] = pagetoken if pagetoken.present?
     url       = URI [PLACES_BASE_URL, path].join
     url.query = options.to_param
     Rails.logger.info "Initializing request ...."
     Rails.logger.info CGI.unescape(url.to_s)
     response  = HTTParty.get(url)
-    results   = response["results"].select do |result|
+    results   << response["results"].select do |result|
       result["scope"] == "APP"
     end
+    results.flatten!
+    search(radius, response["next_page_token"], results) if response["next_page_token"].present?
     results.collect{|r| r["place_id"] }
   end
 
