@@ -13,8 +13,8 @@ class Places
     url       = URI [PLACES_BASE_URL, path].join
     url.query = options.to_param
     Rails.logger.info "Initializing request ...."
-    Rails.logger.info CGI.unescape(url)
-    response  = HTTParty.get(url.to_s)
+    Rails.logger.info CGI.unescape(url.to_s)
+    response  = HTTParty.get(url)
     results   = response["results"].select do |result|
       result["scope"] == "APP"
     end
