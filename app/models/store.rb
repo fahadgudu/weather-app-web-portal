@@ -13,21 +13,16 @@ class Store < ActiveRecord::Base
 
   belongs_to :company
 
-  before_create :update_co_ordinates
+  geocoded_by :address               # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
 
-  private
+  reverse_geocoded_by :latitude, :longitude
 
-  def update_co_ordinates
-    begin
-      self.latitude, self.longitude = Geocoder.coordinates self.address
-      place = Places.new(latitude, longitude)
-      response = place.add!(name, address, phone)
-      self.places_id = response["place_id"]
-    rescue Exception => e
-      Rails.logger.info e.message
-      errors.add(:base, e.message)
-    end
-
+  def self.search(options = {})
+    radius_in_km = (options[:distance] || RADIUS).to_f / 1000
+    stores = self.near([options[:latitude],options[:longitude]], radius_in_km, units: :km) if options[:latitude].present? && options[:longitude].present?
+    stores = @stores.joins(:company).where('companies.name = ?', options[:company]) if options[:company].present?
+    stores
   end
 
 end
