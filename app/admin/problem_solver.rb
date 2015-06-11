@@ -3,7 +3,7 @@ ActiveAdmin.register ProblemSolver do
   filter :problem
   filter :resolution
 
-  permit_params :problem, :resolution,
+  permit_params :title, :problem, :resolution,
     banner_attributes: [:id, :image],
     recommended_products_attributes: [:id, :product_id, :_destroy]
 
