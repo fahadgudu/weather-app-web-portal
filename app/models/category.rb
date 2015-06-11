@@ -4,8 +4,8 @@ class Category < ActiveRecord::Base
 
   alias_attribute :title, :name
 
-  has_many :products
-  has_many :sub_categories, class_name: "Category", foreign_key: :parent_id
+  has_many :products, dependent: :destroy
+  has_many :sub_categories, class_name: "Category", foreign_key: :parent_id, dependent: :destroy
 
   belongs_to :parent, class_name: "Category"
 
