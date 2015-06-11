@@ -9,6 +9,7 @@ ActiveAdmin.register ProblemSolver do
 
     form do |f|
       f.inputs 'Details' do
+        f.input :title
         f.input :problem
         f.input :resolution
       end
