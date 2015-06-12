@@ -21,7 +21,7 @@ class Store < ActiveRecord::Base
   def self.search(options = {})
     radius_in_km = (options[:distance] || RADIUS).to_f / 1000
     stores = self
-    stores = @stores.joins(:company).where('companies.name = ?', options[:company]) if options[:company].present?
+    stores = stores.joins(:company).where('companies.name = ?', options[:company]) if options[:company].present?
     stores = self.near([options[:latitude],options[:longitude]], radius_in_km, units: :km) if options[:latitude].present? && options[:longitude].present?
     stores
   end
