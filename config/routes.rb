@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       resources :growing_guides, only: [:index, :show], :path => "how_to_grow"
       resources :problem_solvers, only: [:index, :show], :path => "problem_solver"
       resources :stores, only: [:index, :show], :path => "retailers"
+      resources :promotions, only: [:index, :show]
+      resources :devices, only: [:create] do
+        member do
+          post :notify
+        end
+      end
       resources :categories, only: [:index, :show] do
         resources :products, only: [:index, :show]
       end

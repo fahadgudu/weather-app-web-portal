@@ -23,6 +23,7 @@ gem 'devise'
 gem 'faker'
 gem 'geocoder'
 gem 'httparty'
+gem 'parse-ruby-client'
 
 group :development, :test do
   gem 'byebug'

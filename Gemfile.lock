@@ -88,6 +88,10 @@ GEM
     execjs (2.5.2)
     faker (1.4.3)
       i18n (~> 0.5)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     figaro (1.1.1)
       thor (~> 0.14)
     fission (0.5.0)
@@ -230,6 +234,7 @@ GEM
     minitest (5.6.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
     mysql2 (0.3.18)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -242,6 +247,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    parse-ruby-client (0.3.0)
+      faraday
+      faraday_middleware
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
@@ -351,6 +359,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   paperclip
+  parse-ruby-client
   pry-byebug
   quiet_assets
   rails (= 4.2.0)
