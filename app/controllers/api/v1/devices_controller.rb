@@ -14,6 +14,8 @@ class Api::V1::DevicesController < ApplicationController
 
   def create
     @device = Device.new device_params
+    @device.save
+    render json: @device
   end
 
   swagger_api :notify do
