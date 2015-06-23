@@ -13,7 +13,7 @@ class Store < ActiveRecord::Base
 
   belongs_to :company
 
-  geocoded_by :address               # can also be an IP address
+  geocoded_by :address
   after_validation :geocode          # auto-fetch coordinates
 
   reverse_geocoded_by :latitude, :longitude
@@ -23,7 +23,7 @@ class Store < ActiveRecord::Base
     stores = self
     stores = stores.joins(:company).where('companies.name = ?', options[:company]) if options[:company].present?
     stores = self.near([options[:latitude],options[:longitude]], radius_in_km, units: :km) if options[:latitude].present? && options[:longitude].present?
-    stores
+    stores.all
   end
 
 end

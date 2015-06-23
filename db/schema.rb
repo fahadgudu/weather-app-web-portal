@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612061009) do
+ActiveRecord::Schema.define(version: 20150623050612) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(version: 20150612061009) do
     t.string   "device_type", limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.float    "latitude",    limit: 24
+    t.float    "longitude",   limit: 24
   end
 
   create_table "growing_guides", force: :cascade do |t|
@@ -139,10 +141,16 @@ ActiveRecord::Schema.define(version: 20150612061009) do
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "promotions", force: :cascade do |t|
-    t.text     "description", limit: 65535
-    t.integer  "product_id",  limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description",       limit: 65535
+    t.integer  "product_id",        limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "title",             limit: 255
+    t.text     "call_to_action",    limit: 65535
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
+    t.datetime "logo_updated_at"
   end
 
   create_table "recommended_products", force: :cascade do |t|

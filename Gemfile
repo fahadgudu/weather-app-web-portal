@@ -32,3 +32,7 @@ group :development, :test do
   gem 'spring'
   gem 'quiet_assets'
 end
+
+gem 'parse_resource', github: 'adelevie/parse_resource'
+gem "kaminari"
+gem 'faraday'

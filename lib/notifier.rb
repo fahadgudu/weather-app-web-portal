@@ -5,17 +5,26 @@ class Notifier
 
   def initialize(device)
     @device = device
+    @connection = Faraday.new(:url => 'https://api.parse.com') do |faraday|
+      faraday.request  :url_encoded             # form-encode POST params
+      faraday.response :logger                  # log requests to STDOUT
+      faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+    end
   end
 
   def notify(message, options = {})
-    Parse.init(:application_id  => APP_ID, :api_key => API_KEY)
-    push = Parse::Push.new(data(message, options), channel)
-    push.type = @device.device_type
-    push.save
+    @connection.post do |req|
+      req.url '/1/push'
+      req.headers['Content-Type'] = 'application/json'
+      req.headers['X-Parse-Application-Id'] = APP_ID
+      req.headers['X-Parse-REST-API-Key'] = API_KEY
+      req.body = data(message, options).to_json
+    end
   end
 
-  def data(message, options = {})
-    {alert: message}.merge options
+  def data(message, options)
+    body = {alert: message}.merge! options
+    { where: {deviceToken: channel}, data: body }
   end
 
   def channel
