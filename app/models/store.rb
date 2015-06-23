@@ -2,19 +2,15 @@ class Store < ActiveRecord::Base
 
   RADIUS = 1000
 
-  include HasAttachedBanner
-
   alias_attribute :title, :name
 
-  has_many :product_stores, dependent: :destroy
-  has_many :products, through: :product_stores
-
-  accepts_nested_attributes_for :product_stores, allow_destroy: true
-
   belongs_to :company
+  has_many :products, through: :company
 
   geocoded_by :address
   after_validation :geocode          # auto-fetch coordinates
+
+  delegate :image, to: :company, allow_nil: true
 
   reverse_geocoded_by :latitude, :longitude
 

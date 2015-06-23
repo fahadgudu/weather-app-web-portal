@@ -1,7 +1,6 @@
 ActiveAdmin.register Store, as: "Retailer" do
 
-  permit_params :name, :address, :postcode, :phone, :company_id,
-    banner_attributes: [:id, :image]
+  permit_params :name, :address, :postcode, :phone, :company_id
 
   filter :company
   filter :name
@@ -24,14 +23,6 @@ ActiveAdmin.register Store, as: "Retailer" do
       f.input :postcode
       f.input :phone
       f.input :company
-    end
-    f.inputs :image,
-      name: "Logo",
-        for: [:banner, f.object.banner || Banner.new]
-    f.inputs 'Products' do
-      f.has_many :product_stores, heading: nil, allow_destroy: true do |t|
-        t.input :product_id, as: :select, collection: Product.all
-      end
     end
     f.actions
 

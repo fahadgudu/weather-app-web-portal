@@ -3,7 +3,7 @@ ActiveAdmin.register Product do
   permit_params :title, :description, :category_id, :image, :amount_needed, :product_type, :product_size,
     usages_attributes: [:id, :title, :description, :_destroy],
     instructions_attributes: [:id, :detail, :_destroy],
-    product_stores_attributes: [:id, :store_id, :_destroy]
+    company_products_attributes: [:id, :company_id, :_destroy]
 
   filter :category
   filter :title
@@ -42,8 +42,8 @@ ActiveAdmin.register Product do
       end
     end
     f.inputs 'Retailers' do
-      f.has_many :product_stores, heading: nil, allow_destroy: true do |t|
-        t.input :store_id, as: :select, collection: Store.all
+      f.has_many :company_products, heading: nil, allow_destroy: true do |t|
+        t.input :commpany_id, as: :select, collection: Company.all
       end
     end
     f.actions

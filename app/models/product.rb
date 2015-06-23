@@ -2,12 +2,12 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
   has_many :recommended_products, dependent: :destroy
-  has_many :product_stores, dependent: :destroy
-  has_many :stores, through: :product_stores
+  has_many :company_products, dependent: :destroy
+  has_many :companies, through: :company_products
+  has_many :stores, through: :companies
   has_many :usages, dependent: :destroy
   has_many :instructions, as: :instructable, dependent: :destroy
 
-  accepts_nested_attributes_for :product_stores, allow_destroy: true
   accepts_nested_attributes_for :usages, allow_destroy: true
   accepts_nested_attributes_for :instructions, allow_destroy: true
 
