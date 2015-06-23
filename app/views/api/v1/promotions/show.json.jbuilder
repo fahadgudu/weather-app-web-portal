@@ -1,6 +1,3 @@
 json.promotion do
-  json.extract! @promotion, :id, :description, :image
-  json.product do
-    json.extract! @promotion.product, :id, :title, :image, :description, :category_id, :category_name
-  end
+  json.extract! @promotion, :id, :title, :description, :image, :call_to_action
 end
