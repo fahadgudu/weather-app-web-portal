@@ -43,7 +43,7 @@ ActiveAdmin.register Product do
     end
     f.inputs 'Retailers' do
       f.has_many :company_products, heading: nil, allow_destroy: true do |t|
-        t.input :commpany_id, as: :select, collection: Company.all
+        t.input :company_id, as: :select, collection: Company.all
       end
     end
     f.actions
