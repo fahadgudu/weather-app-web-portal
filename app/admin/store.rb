@@ -8,6 +8,19 @@ ActiveAdmin.register Store, as: "Retailer" do
   filter :postcode
   filter :phone
 
+  active_admin_importable do |model, hash|
+    model.find_or_initialize_by(name: hash[:name]) do |store|
+      company = Company.find_by_name(hash[:company])
+      if company
+        store.company_id = company.id
+        store.phone = hash[:phone]
+        store.address = hash[:address]
+        store.postcode = hash[:postcode]
+        store.save
+      end
+    end
+  end
+
   index do
     column :name
     column :address
