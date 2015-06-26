@@ -37,3 +37,6 @@ end
 gem 'parse_resource', github: 'adelevie/parse_resource'
 gem "kaminari"
 gem 'faraday'
+gem 'select2-rails'
+gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
+

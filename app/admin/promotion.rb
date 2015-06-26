@@ -3,7 +3,7 @@ ActiveAdmin.register Promotion do
 
   filter :product
 
-  permit_params :title, :call_to_action, :description, :product_id,
+  permit_params :title, :call_to_action, :description, :product_id, :call_to_action_link, :call_to_action_selection ,
     banner_attributes: [:id, :image]
 
   index do
@@ -17,7 +17,8 @@ ActiveAdmin.register Promotion do
     f.inputs 'Details' do
       f.input :title
       f.input :description
-      f.input :call_to_action
+      f.input :call_to_action_link
+      f.input :call_to_action_selection, as: :select2, collection: Promotion.call_to_action_options
     end
     f.inputs :image,
       name: "Banner",
