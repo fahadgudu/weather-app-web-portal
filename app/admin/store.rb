@@ -31,6 +31,7 @@ ActiveAdmin.register Store, as: "Retailer" do
     column :phone
     column :company
     column :state
+    actions
   end
 
   form do |f|
