@@ -15,7 +15,10 @@ ActiveAdmin.register Store, as: "Retailer" do
         store.company_id = company.id
         store.phone = hash[:phone]
         store.address = hash[:address]
-        store.postcode = hash[:postcode]
+        store.postcode = hash[:number]
+        store.fax = hash[:fax]
+        store.email = hash[:email]
+        store.state = hash[:state]
         store.save
       end
     end
