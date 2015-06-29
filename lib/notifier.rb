@@ -24,7 +24,7 @@ class Notifier
 
   def data(message, options)
     body = {alert: message}.merge! options
-    { where: {deviceToken: channel}, data: body }
+    { where: {deviceToken: channel, active: true}, data: body }
   end
 
   def channel
