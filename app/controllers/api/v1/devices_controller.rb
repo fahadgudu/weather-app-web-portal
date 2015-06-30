@@ -13,7 +13,8 @@ class Api::V1::DevicesController < ApplicationController
   end
 
   def create
-    @device = Device.new device_params
+    @device = Device.find_by(token: params[:device][:token]) if params[:device][:token].present?
+    @device ||= Device.new device_params
     @device.save
     render json: @device
   end
