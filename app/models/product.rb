@@ -19,4 +19,6 @@ class Product < ActiveRecord::Base
   delegate :parent_name, to: :category, prefix: true
   delegate :parent_id, to: :category, prefix: true
 
+  acts_as_list scope: :category
+
 end

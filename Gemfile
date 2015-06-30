@@ -39,4 +39,5 @@ gem "kaminari"
 gem 'faraday'
 gem 'select2-rails'
 gem 'activeadmin-select2', github: 'mfairburn/activeadmin-select2'
-
+gem 'acts_as_list'
+gem 'activeadmin-sortable'

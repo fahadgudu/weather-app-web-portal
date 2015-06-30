@@ -10,6 +10,18 @@ ActiveAdmin.register GrowingGuide, as: "How To Grow" do
     banner_attributes: [:id, :image],
     recommended_products_attributes: [:id, :product_id, :_destroy]
 
+  config.sort_order = 'position_asc' # assumes you are using 'position' for your acts_as_list column
+  config.paginate   = false # optional; drag-and-drop across pages is not supported
+
+  sortable
+
+  index do
+    sortable_handle_column
+    column :id
+    column :title
+    actions
+  end
+
   form do |f|
     f.inputs 'Details' do
       f.input :title

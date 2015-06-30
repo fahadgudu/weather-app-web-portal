@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150626085612) do
     t.integer  "parent_id",  limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "position",   limit: 4
   end
 
   create_table "companies", force: :cascade do |t|
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150626085612) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "position",    limit: 4
   end
 
   create_table "growing_seasons", force: :cascade do |t|
@@ -143,6 +145,7 @@ ActiveRecord::Schema.define(version: 20150626085612) do
     t.float    "amount_needed",      limit: 24,    default: 0.0
     t.integer  "product_type",       limit: 4
     t.integer  "product_size",       limit: 4
+    t.integer  "position",           limit: 4
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree

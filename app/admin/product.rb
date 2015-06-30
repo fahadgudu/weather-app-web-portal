@@ -5,12 +5,18 @@ ActiveAdmin.register Product do
     instructions_attributes: [:id, :detail, :_destroy],
     company_products_attributes: [:id, :company_id, :_destroy]
 
+  config.sort_order = 'position_asc' # assumes you are using 'position' for your acts_as_list column
+  config.paginate   = true # optional; drag-and-drop across pages is not supported
+
+  sortable # creates the controller action which handles the sorting
+
   filter :category
   filter :title
   filter :stores
   filter :description
 
   index do
+    sortable_handle_column # inserts a drag handle
     column :id
     column :title
     column :amount_needed

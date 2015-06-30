@@ -14,6 +14,8 @@ class Category < ActiveRecord::Base
 
   delegate :name, to: :parent, prefix: true
 
+  acts_as_list
+
   def parent?
     !self.parent_id.present?
   end

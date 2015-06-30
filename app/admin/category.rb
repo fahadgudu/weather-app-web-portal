@@ -5,14 +5,18 @@ ActiveAdmin.register Category do
   filter :parent
   filter :name
 
+  config.sort_order = 'position_asc' # assumes you are using 'position' for your acts_as_list column
+  sortable
+
   permit_params :name, :parent_id,
     banner_attributes: [:id, :image]
 
   index do
+    sortable_handle_column
     id_column
     column :name
     column :parent
-    column "Type", :category_type
+    column "Type", :category_type, sortable: 'parent_id'
     actions
   end
 
