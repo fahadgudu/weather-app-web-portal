@@ -17,6 +17,13 @@
               "type": "string",
               "description": "Access Token",
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "tree",
+              "type": "string",
+              "description": "Optional parameter to show the whole tree of sub categories and products",
+              "required": false
             }
           ],
           "responseMessages": [

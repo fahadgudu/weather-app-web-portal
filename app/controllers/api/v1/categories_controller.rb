@@ -6,11 +6,12 @@ class Api::V1::CategoriesController < ApplicationController
     summary "Returns all the categories"
     notes "This lists all the parent categories"
     param :query, :access_token, :string, :required, "Access Token"
+    param :query, :tree, :string, :optional, "Optional parameter to show the whole tree of sub categories and products"
     response :unauthorized
   end
 
   def index
-    @categories = Category.top
+    @categories = Category.top.includes([:banner, {sub_categories: [:products, :banner]}] )
   end
 
   swagger_api :show do
