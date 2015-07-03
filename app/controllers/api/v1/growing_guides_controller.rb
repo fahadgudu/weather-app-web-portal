@@ -10,7 +10,7 @@ class Api::V1::GrowingGuidesController < ApplicationController
   end
 
   def index
-    @growing_guides = GrowingGuide.all
+    @growing_guides = GrowingGuide.ordered.includes(:banner)
   end
 
   swagger_api :show do

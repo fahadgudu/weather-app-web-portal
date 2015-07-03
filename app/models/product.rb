@@ -21,4 +21,6 @@ class Product < ActiveRecord::Base
 
   acts_as_list scope: :category
 
+  scope :ordered, -> { order('position asc')}
+
 end

@@ -11,7 +11,7 @@ class Api::V1::CategoriesController < ApplicationController
   end
 
   def index
-    @categories = Category.top.includes([:banner, {sub_categories: [:products, :banner]}] )
+    @categories = Category.top.ordered.includes([:banner, {sub_categories: [:products, :banner]}] )
   end
 
   swagger_api :show do
@@ -24,7 +24,7 @@ class Api::V1::CategoriesController < ApplicationController
 
   def show
     @category = Category.find params[:id]
-    @sub_categories = @category.sub_categories
+    @sub_categories = @category.sub_categories.ordered.includes(:banner)
   end
 
 end

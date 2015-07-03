@@ -11,6 +11,7 @@ class Category < ActiveRecord::Base
 
   scope :top, -> { where('parent_id IS NULL') }
   scope :sub, -> { where('parent_id IS NOT NULL') }
+  scope :ordered, -> { order('position asc')}
 
   delegate :name, to: :parent, prefix: true
 

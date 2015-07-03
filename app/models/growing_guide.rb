@@ -11,4 +11,6 @@ class GrowingGuide < ActiveRecord::Base
 
   acts_as_list
 
+  scope :ordered, -> { order('position asc')}
+
 end

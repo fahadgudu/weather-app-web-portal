@@ -13,7 +13,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def index
-    @products = @category.products
+    @products = @category.products.ordered
   end
 
   swagger_api :show do
