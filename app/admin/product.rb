@@ -55,4 +55,10 @@ ActiveAdmin.register Product do
     f.actions
   end
 
+  member_action :sort, method: :post do
+    previously_on_this_position = Product.with_position(params[:position])
+    resource.shuffle_with!(previously_on_this_position)
+    redirect_to collection_path
+  end
+
 end

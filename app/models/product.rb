@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
 
+  include Repositionable
+
   belongs_to :category
   has_many :recommended_products, dependent: :destroy
   has_many :company_products, dependent: :destroy
@@ -18,8 +20,6 @@ class Product < ActiveRecord::Base
   delegate :name, to: :category, prefix: true
   delegate :parent_name, to: :category, prefix: true
   delegate :parent_id, to: :category, prefix: true
-
-  acts_as_list scope: :category
 
   scope :ordered, -> { order('position asc')}
 

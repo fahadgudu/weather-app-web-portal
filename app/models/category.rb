@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
 
   include HasAttachedBanner
+  include Repositionable
 
   alias_attribute :title, :name
 
@@ -14,8 +15,6 @@ class Category < ActiveRecord::Base
   scope :ordered, -> { order('position asc')}
 
   delegate :name, to: :parent, prefix: true
-
-  acts_as_list
 
   def parent?
     !self.parent_id.present?
