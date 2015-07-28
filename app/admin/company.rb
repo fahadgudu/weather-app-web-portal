@@ -1,6 +1,6 @@
 ActiveAdmin.register Company do
 
-  permit_params :name,
+  permit_params :name, product_ids: [],
     banner_attributes: [:id, :image],
     company_products_attributes: [:id, :company_id, :product_id]
 
@@ -9,9 +9,7 @@ ActiveAdmin.register Company do
       f.input :name
     end
     f.inputs 'Products' do
-      f.has_many :company_products, heading: nil, allow_destroy: true do |t|
-        t.input :product_id, as: :select, collection: Product.all
-      end
+      f.input :product_ids, as: :select2_multiple, collection: Product.all
     end
     f.inputs :image,
       name: "Logo",
