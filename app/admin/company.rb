@@ -9,7 +9,7 @@ ActiveAdmin.register Company do
       f.input :name
     end
     f.inputs 'Products' do
-      f.input :product_ids, as: :select2_multiple, collection: Product.all
+      f.input :product_ids, as: :select2_multiple, collection: Product.all, label: 'Select Products'
     end
     f.inputs :image,
       name: "Logo",
