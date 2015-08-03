@@ -91,11 +91,11 @@
       bounds = map.getBounds();
       sw = bounds.getSouthWest();
       ne = bounds.getNorthEast();
-      $('#sw_lat').val(sw.A);
-      $('#sw_lng').val(sw.F);
+      $('#sw_lat').val(sw.lat());
+      $('#sw_lng').val(sw.lng());
 
-      $('#ne_lat').val(ne.A);
-      $('#ne_lng').val(ne.F);
+      $('#ne_lat').val(ne.lat());
+      $('#ne_lng').val(ne.lng());
     });
   }
 
