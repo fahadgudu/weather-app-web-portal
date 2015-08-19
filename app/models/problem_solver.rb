@@ -4,4 +4,6 @@ class ProblemSolver < ActiveRecord::Base
   include ActsAsRecommendable
   include Repositionable
 
+  scope :position_asc, -> { order('position asc') }
+
 end

@@ -10,7 +10,7 @@ class Api::V1::ProblemSolversController < ApplicationController
   end
 
   def index
-    @problem_solvers = ProblemSolver.all
+    @problem_solvers = ProblemSolver.all.position_asc
   end
 
   swagger_api :show do
