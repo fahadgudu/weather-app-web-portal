@@ -13,7 +13,7 @@
 /tmp
 public/products/*
 public/banners/*
-
+.idea
 # Ignore application configuration
 /config/application.yml
 

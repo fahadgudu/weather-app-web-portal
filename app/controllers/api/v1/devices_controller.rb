@@ -12,9 +12,11 @@ class Api::V1::DevicesController < ApplicationController
     response :unauthorized
   end
 
+  #  {"access_token"=>"2078edc46a00588c", "device"=>{"device_type"=>"ios", "postcode"=>"2000", "token"=>"XXXXXXXXXXX"}}
   def create
-    @device = Device.find_by(token: params[:device][:token]) if params[:device][:token].present?
+    @device = Device.find_by(token: device_params[:token]) if device_params[:token].present?
     @device ||= Device.new device_params
+    @device.postcode = device_params[:postcode] if device_params[:postcode].present?
     @device.save
     render json: @device
   end
