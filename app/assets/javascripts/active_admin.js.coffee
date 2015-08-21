@@ -9,6 +9,7 @@ readURL = (input) ->
 
     reader.onload = (e) ->
       $('.inline-hints img').attr 'src', e.target.result
+      $('.inline-hints img').removeClass 'hide'
       return
     reader.readAsDataURL input.files[0]
   return

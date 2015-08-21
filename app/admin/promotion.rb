@@ -22,7 +22,7 @@ ActiveAdmin.register Promotion do
     end
 
     f.inputs 'Banner', for: [:banner, f.object.banner || Banner.new] do |b|
-      b.input :image, :hint => f.object.banner.nil? ? content_tag(:span, 'No image yet.') : image_tag(asset_path(f.object.banner.image.path))
+      b.input :image, :hint => f.object.banner.nil? ? image_tag('#', class: 'hide') : image_tag(asset_path(f.object.banner.image.path))
     end
     f.actions
   end

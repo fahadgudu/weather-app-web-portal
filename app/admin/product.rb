@@ -31,7 +31,7 @@ ActiveAdmin.register Product do
       f.input :title
       f.input :description
       f.input :category, as: :select, collection: Category.sub
-      f.input :image, as: :file, hint: f.object.image.nil? ? content_tag(:span, 'No image yet.') : image_tag(asset_path(f.object.image.path))
+      f.input :image, as: :file, hint: f.object.image.nil? ? image_tag('#', class: 'hide') : image_tag(asset_path(f.object.image.path))
       f.input :amount_needed
       f.input :product_type, as: :select, collection: [["Bag",0],["Bucket",1],["Bottle",2],["Hold on",3],["Potting", 4]]
       f.input :product_size
