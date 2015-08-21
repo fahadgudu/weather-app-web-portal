@@ -8,8 +8,7 @@ ActiveAdmin.register Category do
   config.sort_order = 'position_asc' # assumes you are using 'position' for your acts_as_list column
   sortable
 
-  permit_params :name, :parent_id,
-    banner_attributes: [:id, :image]
+  permit_params :name, :parent_id, banner_attributes: [:id, :image]
 
   index do
     sortable_handle_column
@@ -20,14 +19,15 @@ ActiveAdmin.register Category do
     actions
   end
 
-  form do |f|
+  form html: {enctype: 'multipart/form-data'} do |f|
     f.inputs 'Details' do
       f.input :parent
       f.input :name
     end
-    f.inputs :image,
-      name: "Banner",
-      for: [:banner, f.object.banner || Banner.new]
+    f.inputs 'Banner', for: [:banner, f.object.banner || Banner.new] do |b|
+      b.input :image, :hint => f.object.banner.nil? ? content_tag(:span, 'No image yet.') : image_tag(asset_path(f.object.banner.image.path))
+    end
+
     f.actions
   end
 

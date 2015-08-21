@@ -20,9 +20,10 @@ ActiveAdmin.register Promotion do
       f.input :call_to_action_link
       f.input :call_to_action_selection, as: :select2, collection: Promotion.call_to_action_options
     end
-    f.inputs :image,
-      name: "Banner",
-      for: [:banner, f.object.banner || Banner.new]
+
+    f.inputs 'Banner', for: [:banner, f.object.banner || Banner.new] do |b|
+      b.input :image, :hint => f.object.banner.nil? ? content_tag(:span, 'No image yet.') : image_tag(asset_path(f.object.banner.image.path))
+    end
     f.actions
   end
 

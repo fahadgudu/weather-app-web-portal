@@ -43,9 +43,10 @@ ActiveAdmin.register GrowingGuide, as: "How To Grow" do
         t.input :product_id,   as: :select,      :collection => Product.all
       end
     end
-    f.inputs :image,
-      name: "Banner",
-      for: [:banner, f.object.banner || Banner.new]
+
+    f.inputs 'Banner', for: [:banner, f.object.banner || Banner.new] do |b|
+      b.input :image, :hint => f.object.banner.nil? ? content_tag(:span, 'No image yet.') : image_tag(asset_path(f.object.banner.image.path))
+    end
     f.actions
   end
 

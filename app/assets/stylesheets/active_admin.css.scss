@@ -24,3 +24,7 @@ fieldset.inputs + li#promotion_banner_attributes_image_input{
   display: none;
 }
 .activeadmin-sortable .handle { cursor: move; }
+
+.inline-hints img {
+  width: 150px;
+}
