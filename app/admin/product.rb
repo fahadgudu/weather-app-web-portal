@@ -12,6 +12,7 @@ ActiveAdmin.register Product do
 
   filter :category
   filter :title
+  filter :calculator_type, as: :select, collection: Product.calculator_types.map {|k, v| [k.humanize, v]}
   filter :stores
   filter :description
 
