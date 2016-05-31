@@ -2,6 +2,8 @@ class Product < ActiveRecord::Base
 
   include Repositionable
 
+  enum calculator_type: [:normal, :pot, :depth]
+
   belongs_to :category
   has_many :recommended_products, dependent: :destroy
   has_many :company_products, dependent: :destroy
