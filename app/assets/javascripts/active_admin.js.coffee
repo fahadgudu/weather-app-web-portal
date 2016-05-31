@@ -18,6 +18,6 @@ readURL = (input) ->
 $(document).ready ->
   $('#product_image, #category_banner_attributes_image, #company_banner_attributes_image, ' +
       '#growing_guide_banner_attributes_image, #problem_solver_banner_attributes_image, ' +
-      '#promotion_banner_attributes_image').on 'change', ->
+      '#promotion_banner_attributes_image, ' + '#video_playlist_cover_image').on 'change', ->
         readURL this
         return
