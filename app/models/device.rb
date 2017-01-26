@@ -16,6 +16,17 @@ class Device < ActiveRecord::Base
 
   after_validation :geocode
 
+	def self.send_fcm_notification(promotion, devices)
+		f = Firebase.new
+		data = f.data(promotion.title, id: promotion.id)
+		responses = []
+		(devices.each_slice(1000).to_a).each do |device_token|
+			response = f.send_notification(device_token, data)
+			responses << response
+		end
+		return responses.to_yaml
+	end
+
   def send_promotion(promotion)
     n = Notifier.new self
     n.notify(promotion.title, id: promotion.id)

@@ -8,10 +8,13 @@ class Promotion < ActiveRecord::Base
   belongs_to :product
 
   def notify!(options)
-    devices = Device.within_bounding_box([options[:sw_lat],options[:sw_lng],options[:ne_lat],options[:ne_lng]])
-    devices.each do |device|
-      device.send_promotion(self)
-    end
+		if options[:sw_lat].present? && options[:sw_lng].present? && options[:ne_lat].present? && options[:ne_lng].present?
+			devices = Device.within_bounding_box([options[:sw_lat],options[:sw_lng],options[:ne_lat],options[:ne_lng]])
+		else
+			devices = Device.all
+		end
+		devices = devices.where(device_type: 'android').pluck(:token)
+		Device.send_fcm_notification(self, devices) unless devices.empty?
   end
 
   def call_to_action_selection=(val)
