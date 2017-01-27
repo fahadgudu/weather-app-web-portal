@@ -21,6 +21,7 @@ Rails.application.routes.draw do
           get "/:section", to: "search#index", as: :section, constraints: { section: /how_to_grow|product|retailer|problem_solver/ }
         end
       end
+      resources :video_playlists, only: [:index]
       post '/generateToken', to: "tokenizer#generate_token"
     end
   end

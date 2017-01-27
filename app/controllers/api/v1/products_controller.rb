@@ -17,7 +17,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   swagger_api :show do
-    summary "Returns the deails of a particular product"
+    summary "Returns the details of a particular product"
     notes "This display details of a particular product"
     param :query, :access_token, :string, :required, "Access Token"
     param :query, :category_id,  :integer, :required, "ID of the category"

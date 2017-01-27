@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722093457) do
+ActiveRecord::Schema.define(version: 20160531032948) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20150722093457) do
     t.integer  "product_type",       limit: 4
     t.integer  "product_size",       limit: 4
     t.integer  "position",           limit: 4
+    t.integer  "calculator_type",    limit: 4,     default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -203,6 +204,17 @@ ActiveRecord::Schema.define(version: 20150722093457) do
   end
 
   add_index "usages", ["product_id"], name: "index_usages_on_product_id", using: :btree
+
+  create_table "video_playlists", force: :cascade do |t|
+    t.string   "title",                    limit: 255
+    t.string   "cover_image_file_name",    limit: 255
+    t.string   "cover_image_content_type", limit: 255
+    t.integer  "cover_image_file_size",    limit: 4
+    t.datetime "cover_image_updated_at"
+    t.string   "youtube_playlist_id",      limit: 255
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   add_foreign_key "growing_seasons", "growing_guides"
   add_foreign_key "product_stores", "products"

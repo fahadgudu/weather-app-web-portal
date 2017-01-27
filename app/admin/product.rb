@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
 
-  permit_params :title, :description, :category_id, :image, :amount_needed, :product_type, :product_size,
+  permit_params :title, :description, :category_id, :image, :amount_needed, :product_type, :product_size, :calculator_type,
     usages_attributes: [:id, :title, :description, :_destroy],
     instructions_attributes: [:id, :detail, :_destroy],
     company_products_attributes: [:id, :company_id, :_destroy]
@@ -12,6 +12,7 @@ ActiveAdmin.register Product do
 
   filter :category
   filter :title
+  filter :calculator_type, as: :select, collection: Product.calculator_types.map {|k, v| [k.humanize, v]}
   filter :stores
   filter :description
 
@@ -22,6 +23,7 @@ ActiveAdmin.register Product do
     column :amount_needed
     column :product_size
     column :product_type
+    column :calculator_type
     column :category
     actions
   end
@@ -35,6 +37,7 @@ ActiveAdmin.register Product do
       f.input :amount_needed
       f.input :product_type, as: :select, collection: [["Bag",0],["Bucket",1],["Bottle",2],["Hold on",3],["Potting", 4]]
       f.input :product_size
+      f.input :calculator_type, as: :select, collection: Product.calculator_types.map {|k, v| [k.humanize, k]}
     end
     f.inputs 'How to use' do
       f.has_many :usages, heading: nil, allow_destroy: true do |t|
