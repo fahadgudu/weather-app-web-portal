@@ -7,7 +7,13 @@ class Firebase
 	end
 
 	def data(message, options)
-		options = {data: {alert: message}.merge!(options), collapse_key: "promotions"}
+		options = { notification:
+									 { body: message, }.merge!(options),
+							 data: { alert: message }.merge!(options),
+							 priority: 'high',
+							 collapse_key: "promotions"
+		}
+
 	end
 
 	def send_notification(tokens, data)

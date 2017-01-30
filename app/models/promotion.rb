@@ -13,7 +13,7 @@ class Promotion < ActiveRecord::Base
 		else
 			devices = Device.all
 		end
-		devices = devices.where(device_type: 'android').pluck(:token)
+		devices = devices.pluck(:token)
 		Device.send_fcm_notification(self, devices) unless devices.empty?
   end
 
