@@ -21,3 +21,5 @@ $(document).ready ->
       '#promotion_banner_attributes_image, ' + '#video_playlist_cover_image').on 'change', ->
         readURL this
         return
+  jQuery ->
+    $('a.fancybox').fancybox()

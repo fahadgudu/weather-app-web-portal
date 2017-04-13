@@ -16,4 +16,11 @@ class User < ActiveRecord::Base
     end
   end
 
-end
+  def get_weather_data(lat = nil, long = nil)
+      ForecastIO.api_key = '19b2f7931e74fa8fbfd9c0c8e9f79937'
+      forecast = ForecastIO.forecast(latitude: lat, longitude: long)
+      forecast.to_json
+
+  end
+
+  end

@@ -12,7 +12,8 @@ ActiveAdmin.register User do
     column :latitude
     column :longitude
     actions defaults: true do |user|
-      link_to 'Send SMS', send_sms_admin_user_path(user)
+      span link_to 'Send SMS', send_sms_admin_user_path(user)
+      span link_to 'Forecast', weather_forecast_admin_user_path(user), class: 'fancybox member_link', data: { 'fancybox-type' => 'ajax' } if user.address.present?
     end
   end
 
@@ -45,6 +46,13 @@ ActiveAdmin.register User do
   member_action :send_sms, method: [:post, :get] do
     resource.send_sms
     redirect_to admin_users_path, notice: 'SMS is sent'
+  end
+
+  member_action :weather_forecast, method: [:post, :get] do
+    user = resource
+    lat, long = resource.latitude, resource.longitude
+    @weather_data = user.get_weather_data(lat, long)
+    render :json => @weather_data
   end
 
 

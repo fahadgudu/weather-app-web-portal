@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require swagger-ui
+//= require jquery
+//= require fancybox
 //= require_tree .
