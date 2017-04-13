@@ -11,7 +11,9 @@ ActiveAdmin.register User do
     column :address
     column :latitude
     column :longitude
-    actions
+    actions defaults: true do |user|
+      link_to 'Send SMS', send_sms_admin_user_path(user)
+    end
   end
 
   show  do |user|
@@ -38,6 +40,11 @@ ActiveAdmin.register User do
       f.input :address
     end
     f.actions
+  end
+
+  member_action :send_sms, method: [:post, :get] do
+    resource.send_sms
+    redirect_to admin_users_path, notice: 'SMS is sent'
   end
 
 
