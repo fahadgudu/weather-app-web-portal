@@ -1,5 +1,6 @@
 ActiveAdmin.register Product do
 
+  menu false
   permit_params :title, :description, :category_id, :image, :amount_needed, :product_type, :product_size, :calculator_type,
     usages_attributes: [:id, :title, :description, :_destroy],
     instructions_attributes: [:id, :detail, :_destroy],

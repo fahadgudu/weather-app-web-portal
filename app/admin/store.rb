@@ -1,5 +1,6 @@
 ActiveAdmin.register Store, as: "Retailer" do
 
+  menu false
   permit_params :name, :address, :postcode, :phone, :company_id, :email, :state
 
   filter :company

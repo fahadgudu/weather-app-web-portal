@@ -1,5 +1,6 @@
 ActiveAdmin.register Promotion do
 
+  menu false
 
   filter :product
 

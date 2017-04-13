@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
 
-  menu label: "Categories/Sub-Categories"
+  menu false
 
   filter :parent
   filter :name

@@ -11,15 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531032948) do
+ActiveRecord::Schema.define(version: 20170413171122) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
-    t.string   "namespace",     limit: 255
-    t.text     "body",          limit: 65535
-    t.string   "resource_id",   limit: 255,   null: false
-    t.string   "resource_type", limit: 255,   null: false
-    t.integer  "author_id",     limit: 4
-    t.string   "author_type",   limit: 255
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "author_id"
+    t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,16 +32,16 @@ ActiveRecord::Schema.define(version: 20160531032948) do
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,173 +50,184 @@ ActiveRecord::Schema.define(version: 20160531032948) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "banners", force: :cascade do |t|
-    t.string   "imageable_type",     limit: 255
-    t.integer  "imageable_id",       limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
     t.datetime "image_updated_at"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "parent_id",  limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "position",   limit: 4
+    t.string   "name"
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "company_products", force: :cascade do |t|
-    t.integer  "company_id", limit: 4
-    t.integer  "product_id", limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "company_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "devices", force: :cascade do |t|
-    t.string   "token",       limit: 255
-    t.string   "postcode",    limit: 255
-    t.string   "device_type", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.float    "latitude",    limit: 24
-    t.float    "longitude",   limit: 24
+    t.string   "token"
+    t.string   "postcode"
+    t.string   "device_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "growing_guides", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "position",    limit: 4
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "position"
   end
 
   create_table "growing_seasons", force: :cascade do |t|
-    t.string   "season",           limit: 255
-    t.text     "instructions",     limit: 65535
-    t.integer  "growing_guide_id", limit: 4
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.string   "season"
+    t.text     "instructions"
+    t.integer  "growing_guide_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   add_index "growing_seasons", ["growing_guide_id"], name: "index_growing_seasons_on_growing_guide_id", using: :btree
 
   create_table "instructions", force: :cascade do |t|
-    t.text     "detail",            limit: 65535
-    t.integer  "instructable_id",   limit: 4
-    t.string   "instructable_type", limit: 255
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "detail"
+    t.integer  "instructable_id"
+    t.string   "instructable_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "problem_solvers", force: :cascade do |t|
-    t.string   "title",      limit: 255
-    t.text     "problem",    limit: 65535
-    t.text     "resolution", limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "position",   limit: 4
+    t.string   "title"
+    t.text     "problem"
+    t.text     "resolution"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
   create_table "product_stores", force: :cascade do |t|
-    t.integer  "product_id", limit: 4
-    t.integer  "store_id",   limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "product_id"
+    t.integer  "store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "product_stores", ["product_id"], name: "index_product_stores_on_product_id", using: :btree
   add_index "product_stores", ["store_id"], name: "index_product_stores_on_store_id", using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.text     "description",        limit: 65535
-    t.string   "title",              limit: 255
-    t.integer  "category_id",        limit: 4
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.string   "image_file_name",    limit: 255
-    t.string   "image_content_type", limit: 255
-    t.integer  "image_file_size",    limit: 4
+    t.text     "description"
+    t.string   "title"
+    t.integer  "category_id"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.float    "amount_needed",      limit: 24,    default: 0.0
-    t.integer  "product_type",       limit: 4
-    t.integer  "product_size",       limit: 4
-    t.integer  "position",           limit: 4
-    t.integer  "calculator_type",    limit: 4,     default: 0
+    t.float    "amount_needed",      default: 0.0
+    t.integer  "product_type"
+    t.integer  "product_size"
+    t.integer  "position"
+    t.integer  "calculator_type",    default: 0
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "promotions", force: :cascade do |t|
-    t.text     "description",       limit: 65535
-    t.integer  "product_id",        limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.string   "title",             limit: 255
-    t.text     "call_to_action",    limit: 65535
-    t.string   "logo_file_name",    limit: 255
-    t.string   "logo_content_type", limit: 255
-    t.integer  "logo_file_size",    limit: 4
+    t.text     "description"
+    t.integer  "product_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "title"
+    t.text     "call_to_action"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
   end
 
   create_table "recommended_products", force: :cascade do |t|
-    t.integer  "product_id",         limit: 4
-    t.integer  "recommendable_id",   limit: 4
-    t.string   "recommendable_type", limit: 255
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "product_id"
+    t.integer  "recommendable_id"
+    t.string   "recommendable_type"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "stores", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "address",    limit: 255
-    t.string   "postcode",   limit: 255
-    t.float    "latitude",   limit: 24
-    t.float    "longitude",  limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "phone",      limit: 255
-    t.integer  "company_id", limit: 4
-    t.string   "places_id",  limit: 255
-    t.string   "fax",        limit: 255
-    t.string   "state",      limit: 255
-    t.string   "email",      limit: 255
+    t.string   "name"
+    t.string   "address"
+    t.string   "postcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "phone"
+    t.integer  "company_id"
+    t.string   "places_id"
+    t.string   "fax"
+    t.string   "state"
+    t.string   "email"
   end
 
   create_table "tokens", force: :cascade do |t|
-    t.string   "access_token", limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.string   "access_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "usages", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
-    t.integer  "product_id",  limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "title"
+    t.text     "description"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "usages", ["product_id"], name: "index_usages_on_product_id", using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "mobile_number"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
   create_table "video_playlists", force: :cascade do |t|
-    t.string   "title",                    limit: 255
-    t.string   "cover_image_file_name",    limit: 255
-    t.string   "cover_image_content_type", limit: 255
-    t.integer  "cover_image_file_size",    limit: 4
+    t.string   "title"
+    t.string   "cover_image_file_name"
+    t.string   "cover_image_content_type"
+    t.integer  "cover_image_file_size"
     t.datetime "cover_image_updated_at"
-    t.string   "youtube_playlist_id",      limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.string   "youtube_playlist_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   add_foreign_key "growing_seasons", "growing_guides"

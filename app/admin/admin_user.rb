@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
 
-  menu label: "Users"
+  menu label: "Admin"
 
   permit_params :email, :password, :password_confirmation
 

@@ -1,5 +1,6 @@
 ActiveAdmin.register Company do
 
+  menu false
   permit_params :name, product_ids: [],
     banner_attributes: [:id, :image], company_products_attributes: [:id, :company_id, :product_id]
 

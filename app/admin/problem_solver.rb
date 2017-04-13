@@ -1,5 +1,6 @@
 ActiveAdmin.register ProblemSolver do
 
+  menu false
   filter :problem
   filter :resolution
 

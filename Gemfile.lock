@@ -268,7 +268,6 @@ GEM
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.18)
     net-http-persistent (3.0.0)
       connection_pool (~> 2.2)
     net-scp (1.2.1)
@@ -286,6 +285,7 @@ GEM
     parse-ruby-client (0.3.0)
       faraday
       faraday_middleware
+    pg (0.20.0)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
@@ -416,10 +416,10 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
-  mysql2
   paperclip
   parse-ruby-client
   parse_resource!
+  pg
   pry-byebug
   quiet_assets
   rails (= 4.2.0)

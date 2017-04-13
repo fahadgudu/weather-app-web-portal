@@ -1,6 +1,6 @@
 ActiveAdmin.register GrowingGuide, as: "How To Grow" do
 
-  menu label: "How To Grow"
+  menu false
 
   filter :title
 
