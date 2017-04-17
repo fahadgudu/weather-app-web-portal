@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   namespace :api do
     scope module: 'v1' do
-      resources :growing_guides, only: [:index, :show], :path => "how_to_grow"
-      resources :problem_solvers, only: [:index, :show], :path => "problem_solver"
-      resources :stores, only: [:index, :show], :path => "retailers"
-      resources :promotions, only: [:index, :show]
+      resources :weathers, only: [:index, :show]
       resources :devices, only: [:create] do
         member do
           post :notify
