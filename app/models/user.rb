@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   def build_response(response)
     body = parse_response(response) || {}
-    response_hash = { body: body, status_code: 200 }
+    response_hash = body
     case response.code
       when 200
         response_hash[:response] = 'success'
@@ -54,14 +54,12 @@ class User < ActiveRecord::Base
   end
 
   def parse_response(response)
-    json_parse = {}
+    json_parse = []
     unless response.empty?
-      json_parse['i'] = encode_weather(response.currently)
-      daily_data = Array.new(0)
+      json_parse << encode_weather(response.currently)
       if response.daily.data.count > 0
         (response.daily.data).each_with_index { |day,index|
-          json_parse[index] = encode_weather(day)
-          daily_data << json_parse[index]
+          json_parse <<  encode_weather(day)
       }
       end
     end
@@ -69,18 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def encode_weather(data)
-    w_hash = Hash.new(0)
-    w_hash[:s] =  data.summary rescue ''
-    w_hash[:i] =  icon_translate(data.icon) rescue ''
-    w_hash[:c] =  data.precipIntensity rescue ''
-    w_hash[:p] =  ((data.precipProbability) * 100).to_i rescue ''
-    w_hash[:t] =  change_to_celcuis(data.temperature) rescue ''
-    w_hash[:x] =  change_to_celcuis(data.apparentTemperatureMax) rescue ''
-    w_hash[:m] =  change_to_celcuis(data.apparentTemperatureMin) rescue ''
-    w_hash[:h] =  data.humidity rescue ''
-    w_hash[:w] =  data.windSpeed rescue ''
-    w_hash[:b] =  data.windBearing rescue ''
-    w_hash
+    "#{data.summary rescue ''},#{icon_translate(data.icon) rescue ''},#{data.precipIntensity rescue ''},#{((data.precipProbability) * 100).abs rescue ''},#{change_to_celcuis(data.temperature) rescue ''},#{change_to_celcuis(data.apparentTemperatureMax) rescue ''},#{change_to_celcuis(data.apparentTemperatureMin) rescue ''},#{data.humidity rescue ''},#{data.windSpeed rescue ''},#{data.windBearing rescue ''}"
   end
 
   def change_to_celcuis(temperature)
