@@ -1,10 +1,10 @@
 require 'benchmark'
 namespace :richgro do
   desc "This task will update the Existing Device Tokens of Parse to FCM supported Tokens"
-  task change_existing_token_to_fcm: :environment do
+  task charge_customer: :environment do
 		start = Time.now
 		puts "Rake task started at #{start}"
-		Firebase.change_the_existing_tokens
+    WeatherUpdate.send_sms_to_users
 		finish = Time.now
 		diff = finish - start
 		puts "Rake task ended at at #{diff}"

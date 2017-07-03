@@ -5,22 +5,15 @@ Rails.application.routes.draw do
   namespace :api do
     scope module: 'v1' do
       resources :weathers, only: [:index, :show]
+      post '/register' => 'weathers#register', :as => :user_register
+      post '/weather_update' => 'weathers#weather_update', :as => :user_weather_update
       resources :devices, only: [:create] do
         member do
           post :notify
-        end
-      end
-      resources :categories, only: [:index, :show] do
-        resources :products, only: [:index, :show]
-      end
-      resources :search, only: [] do
-        collection do
-          get "/:section", to: "search#index", as: :section, constraints: { section: /how_to_grow|product|retailer|problem_solver/ }
         end
       end
       resources :video_playlists, only: [:index]
       post '/generateToken', to: "tokenizer#generate_token"
     end
   end
-  get "/docs", to: "api_docs#index"
 end

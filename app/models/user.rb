@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_one :weather_update
   geocoded_by :address
   after_validation :geocode          # auto-fetch coordinates
 
@@ -13,7 +14,7 @@ class User < ActiveRecord::Base
       user = self
       lat, long = user.latitude, user.longitude
       @weather_data = user.get_weather_data(lat, long)
-      @client.account.messages.create({:from => number, :to => user, :body => @weather_data})
+      @client.account.messages.create({:from => number, :to => user.try(:mobile_number), :body => @weather_data.to_s})
     rescue StandardError => ex
       Rails.logger.error "#{ex.message}"
     end
@@ -46,11 +47,11 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    first_name || email
+    first_name
   end
 
   def name
-    first_name || email
+    first_name
   end
 
   def parse_response(response)
@@ -67,7 +68,17 @@ class User < ActiveRecord::Base
   end
 
   def encode_weather(data)
-    "#{data.summary rescue ''},#{icon_translate(data.icon) rescue ''},#{data.precipIntensity rescue ''},#{((data.precipProbability) * 100).abs rescue ''},#{change_to_celcuis(data.temperature) rescue ''},#{change_to_celcuis(data.apparentTemperatureMax) rescue ''},#{change_to_celcuis(data.apparentTemperatureMin) rescue ''},#{data.humidity rescue ''},#{data.windSpeed rescue ''},#{data.windBearing rescue ''}"
+    #w_hash[:s] =  data.summary rescue ''
+    #    w_hash[:i] =  icon_translate(data.icon) rescue ''
+    #    w_hash[:c] =  data.precipIntensity rescue ''
+    #    w_hash[:p] =  ((data.precipProbability) * 100).to_i rescue ''
+    #    w_hash[:t] =  change_to_celcuis(data.temperature) rescue ''
+    #    w_hash[:x] =  change_to_celcuis(data.apparentTemperatureMax) rescue ''
+    #    w_hash[:m] =  change_to_celcuis(data.apparentTemperatureMin) rescue ''
+    #    w_hash[:h] =  data.humidity rescue ''
+    #    w_hash[:w] =  data.windSpeed rescue ''
+    #    w_hash[:b] =  data.windBearing rescue ''
+    "#{icon_translate(data.icon) rescue ''}:#{icon_translate(data.icon) rescue ''}:#{data.precipIntensity rescue ''}:#{((data.precipProbability) * 100).abs rescue ''}:#{change_to_celcuis(data.temperature) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMax) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMin) rescue '0'}:#{data.humidity rescue ''}:#{data.windSpeed rescue ''}:#{data.windBearing rescue ''}"
   end
 
   def change_to_celcuis(temperature)
