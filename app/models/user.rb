@@ -81,6 +81,20 @@ class User < ActiveRecord::Base
     "#{icon_translate(data.icon) rescue ''}:#{icon_translate(data.icon) rescue ''}:#{data.precipIntensity rescue ''}:#{((data.precipProbability) * 100).abs rescue ''}:#{change_to_celcuis(data.temperature) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMax) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMin) rescue '0'}:#{data.humidity rescue ''}:#{data.windSpeed rescue ''}:#{data.windBearing rescue ''}"
   end
 
+  # [
+  #
+  #     "1:1:0.0235:6.0:10:0:0:0.44:5.55:172",
+  #     "2:2:0.0083:38.0:0:38:29:0.5:3.9:104",
+  #     "3:3:0.0021:16.0:0:39:27:0.48:4.03:111",
+  #     "4:4:0.0067:22.0:0:12:27:0.5:3.67:130",
+  #     "5:5:0.0003:1.0:0:50:29:0.48:3.49:108",
+  #     "6:6:0.0043:9.0:0:43:31:0.43:2.11:140",
+  #     "7:7:0.0186:41.0:0:20:28:0.63:6.83:124",
+  #     "8:8:0.0291:38.0:0:25:27:0.76:8.01:113",
+  #     "9:9:0.0791:63.0:0:0:24:0.82:8.3:109"
+  #
+  # ]
+
   def change_to_celcuis(temperature)
     ((temperature - 32) * 5.0 / 9.0).ceil
   end

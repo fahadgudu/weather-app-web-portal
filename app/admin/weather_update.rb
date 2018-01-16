@@ -6,7 +6,7 @@ ActiveAdmin.register WeatherUpdate do
     selectable_column
     id_column
     column :user do |u|
-      u.user.full_name
+      u.user.full_name rescue ''
     end
     column :after_four_hours, label: 'Update User After 4 hours'
     column :daily, label: 'Daily Update'
@@ -18,7 +18,7 @@ ActiveAdmin.register WeatherUpdate do
     attributes_table do
       row :id
       row :user do |u|
-        u.user.full_name
+        u.user.full_name rescue ''
       end
       row :after_four_hours, label: 'Update User After 4 hours'
       row :daily, label: 'Daily Update'

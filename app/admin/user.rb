@@ -13,7 +13,7 @@ ActiveAdmin.register User do
     column :longitude
     actions defaults: true do |user|
       span link_to 'Send SMS', send_sms_admin_user_path(user)
-      span link_to 'Forecast', weather_forecast_admin_user_path(user), class: 'fancybox member_link', data: { 'fancybox-type' => 'ajax' } if user.address.present?
+      span link_to 'Forecast', weather_forecast_admin_user_path(user), class: 'fancybox member_link', data: { 'fancybox-type' => 'ajax' } if user.present?
     end
   end
 
