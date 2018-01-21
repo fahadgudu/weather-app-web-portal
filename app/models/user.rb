@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
       user = self
       lat, long = user.latitude, user.longitude
       @weather_data = user.get_weather_data(lat, long)
-      @client.account.messages.create({:from => number, :to => user.try(:mobile_number), :body => @weather_data.to_s})
+      @client.account.messages.create({:from => 'weather_update', :to => user.try(:mobile_number), :body => @weather_data.to_s})
     rescue StandardError => ex
       Rails.logger.error "#{ex.message}"
     end
@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
     #    w_hash[:h] =  data.humidity rescue ''
     #    w_hash[:w] =  data.windSpeed rescue ''
     #    w_hash[:b] =  data.windBearing rescue ''
-    "#{icon_translate(data.icon) rescue ''}:#{icon_translate(data.icon) rescue ''}:#{data.precipIntensity rescue ''}:#{((data.precipProbability) * 100).abs rescue ''}:#{change_to_celcuis(data.temperature) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMax) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMin) rescue '0'}:#{data.humidity rescue ''}:#{data.windSpeed rescue ''}:#{data.windBearing rescue ''}"
+    "#{icon_translate(data.icon) rescue ''}:#{icon_translate(data.icon) rescue ''}:#{data.precipIntensity rescue ''}:#{((data.precipProbability) * 100).abs rescue ''}:#{change_to_celcuis(data.temperature) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMax.nil? ? data.temperature : data.apparentTemperatureMax) rescue '0'}:#{change_to_celcuis(data.apparentTemperatureMin.nil? ? data.temperature - 10: data.apparentTemperatureMin) rescue '0'}:#{data.humidity rescue ''}:#{data.windSpeed rescue ''}:#{data.windBearing rescue ''}"
   end
 
   # [
