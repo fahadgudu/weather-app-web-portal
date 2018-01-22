@@ -10,11 +10,11 @@ class User < ActiveRecord::Base
       auth_token = Rails.application.secrets.twilio['auth_token']
       number = Rails.application.secrets.twilio['number']
       @client = Twilio::REST::Client.new account_sid, auth_token
-      user = self.mobile_number
+      # user = self.mobile_number
       user = self
       lat, long = user.latitude, user.longitude
       @weather_data = user.get_weather_data(lat, long)
-      @client.account.messages.create({:from => number, :to => user, :body => @weather_data})
+      @client.account.messages.create({:from => '+14807122626', :to => user.mobile_number, :body => @weather_data})
     rescue StandardError => ex
       Rails.logger.error "#{ex.message}"
     end
