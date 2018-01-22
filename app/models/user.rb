@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
       user = self
       lat, long = user.latitude, user.longitude
       @weather_data = user.get_weather_data(lat, long)
-      @client.account.messages.create({:from => 'weather_update', :to => user.try(:mobile_number), :body => @weather_data.to_s})
+      @client.account.messages.create({:from => number, :to => user, :body => @weather_data})
     rescue StandardError => ex
       Rails.logger.error "#{ex.message}"
     end
