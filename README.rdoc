@@ -1,28 +1,14 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the opensource repo of the ruby code web application hosted on dedicated Heroku server.
 
-Things you may want to cover:
+This code maintains 
+*All the records of participants farmers
+*Their mobile number to get SMS
+*Their preferences to receive the frequency of the weather updates in particular day or week. 
 
-* Ruby version
+Besides these, the server takes the geo-coordinates of the particular user on application install alternatively, when the farmer switches the location and saves into DB.
 
-* System dependencies
+Web server is capable of sending the automated SMS and JSON responses to offline as well as online participants. APIs
+endpoints are accessible to an Android application to record the geo-coordinates and get the weather information on-time Moreover, customized mode. There is also an admin who has super access level to all the activities.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
